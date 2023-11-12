@@ -26,7 +26,6 @@ def lisaa_ja_ota(nestet):
     nestet.ota_varastosta(3.14)
     printer(f"Mehuvarasto: {nestet}", "Virhetilanteita:",
     "Varasto(-100.0);")
-    #AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     return nestet
 
 def main(mehua, olutta):
