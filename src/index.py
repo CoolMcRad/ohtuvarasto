@@ -1,58 +1,59 @@
 from varasto import Varasto
 
+def printer(eka, tok = None, kol = None, nel = None, vii = None):
 
-def main():
-    mehua = Varasto(100.0)
-    olutta = Varasto(100.0, 20.2)
+    print(eka)
+    if tok is not None:
+        print(tok)
+    if kol is not None:
+        print(kol)
+    if nel is not None:
+        print(nel)
+    if vii is not None:
+        print(vii)
 
-    print("Luonnin jälkeen:")
-    print(f"Mehuvarasto: {mehua}")
-    print(f"Olutvarasto: {olutta}")
+def osa_yks(mehua, olutta):
+    printer("Luonnin jälkeen:", f"Mehuvarasto: {mehua}",
+    f"Olutvarasto: {olutta}", "Olut getterit:",
+    f"saldo = {olutta.saldo}", )
+    printer(f"tilavuus = {olutta.tilavuus}",
+    f"paljonko_mahtuu = {olutta.paljonko_mahtuu()}", 
+    "Mehu setterit:", "Lisätään 50.7")
 
-    print("Olut getterit:")
-    print(f"saldo = {olutta.saldo}")
-    print(f"tilavuus = {olutta.tilavuus}")
-    print(f"paljonko_mahtuu = {olutta.paljonko_mahtuu()}")
+def lisaa_ja_ota(nestet):
+    nestet.lisaa_varastoon(50.7)
+    printer(f"Mehuvarasto: {nestet}", "Otetaan 3.14")
+    nestet.ota_varastosta(3.14)
+    printer(f"Mehuvarasto: {nestet}", "Virhetilanteita:",
+    "Varasto(-100.0);")
+    return nestet
 
-    print("Mehu setterit:")
-    print("Lisätään 50.7")
-    mehua.lisaa_varastoon(50.7)
-    print(f"Mehuvarasto: {mehua}")
-    print("Otetaan 3.14")
-    mehua.ota_varastosta(3.14)
-    print(f"Mehuvarasto: {mehua}")
+def main(mehua, olutta):
+    osa_yks(mehua, olutta)
 
-    print("Virhetilanteita:")
-    print("Varasto(-100.0);")
+    mehua = lisaa_ja_ota(mehua)
+
     huono = Varasto(-100.0)
-    print(huono)
+    printer(huono, "Varasto(100.0, -50.7)")
 
-    print("Varasto(100.0, -50.7)")
     huono = Varasto(100.0, -50.7)
-    print(huono)
+    printer(huono, f"Olutvarasto: {olutta}",
+    "olutta.lisaa_varastoon(1000.0)")
 
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.lisaa_varastoon(1000.0)")
     olutta.lisaa_varastoon(1000.0)
-    print(f"Olutvarasto: {olutta}")
+    printer(f"Olutvarasto: {olutta}", f"Mehuvarasto: {mehua}",
+    "mehua.lisaa_varastoon(-666.0)")
 
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.lisaa_varastoon(-666.0)")
     mehua.lisaa_varastoon(-666.0)
-    print(f"Mehuvarasto: {mehua}")
+    printer(f"Mehuvarasto: {mehua}", f"Olutvarasto: {olutta}",
+    "olutta.ota_varastosta(1000.0)")
 
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.ota_varastosta(1000.0)")
     saatiin = olutta.ota_varastosta(1000.0)
-    print(f"saatiin {saatiin}")
-    print(f"Olutvarasto: {olutta}")
+    printer(f"saatiin {saatiin}", f"Olutvarasto: {olutta}",
+    f"Mehuvarasto: {mehua}", "mehua.otaVarastosta(-32.9)")
 
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.otaVarastosta(-32.9)")
     saatiin = mehua.ota_varastosta(-32.9)
-    print(f"saatiin {saatiin}")
-    print(f"Mehuvarasto: {mehua}")
-
+    printer(f"saatiin {saatiin}", f"Mehuvarasto: {mehua}")
 
 if __name__ == "__main__":
-    main()
+    main(Varasto(100.0), Varasto(100.0, 20.2))
